@@ -16,12 +16,13 @@ My_String::My_String(My_String&& x) noexcept
 {
 	std::swap(string_ptr, x.string_ptr);
 	std::swap(size, x.size);
+
+	x.string_ptr = nullptr;
+	
 }
 
-
-
 My_String::~My_String()
-{	
+{
 	delete[] string_ptr;
 }
 
@@ -52,10 +53,93 @@ My_String& My_String::operator=(My_String&& x) noexcept
 	std::swap(string_ptr, x.string_ptr);
 	std::swap(size, x.size);
 
+	x.string_ptr = nullptr;
+
 	return *this;
 }
 
+bool My_String::operator==(const My_String& value) const
+{
+	if (this->size != value.size)
+	{
+		return false;
+	}
+	
+	int tempsize = this->size;
+
+	for (int i = 0; i < tempsize; ++i)
+	{
+		if (this->string_ptr[i] != value.string_ptr[i])
+		{
+			return false;
+		}
+	}
+
+	return true;
+}
+
+bool My_String::operator>(const My_String& value) const
+{
+	int tempsize = this->size < value.size ? value.size : this->size;
+
+	for(int i = 0; i < tempsize; ++i)
+	{
+		if (this->string_ptr[i] == value.string_ptr[i])
+		{
+			continue;
+		}
+		
+		else if(this->string_ptr[i] > value.string_ptr[i])
+		{
+			return true;
+		}
+		
+		else if(this->string_ptr[i] < value.string_ptr[i])
+		{
+			return false;
+		}
+	}
+
+	return false;
+}
+
+bool My_String::operator<(const My_String& value) const
+{
+	int tempsize = this->size < value.size ? value.size : this->size;
+	
+	for (int i = 0; i < tempsize; ++i)
+	{
+		if (this->string_ptr[i] == value.string_ptr[i])
+		{
+			continue;
+		}
+
+		else if (this->string_ptr[i] > value.string_ptr[i])
+		{
+			return false;
+		}
+
+		else if (this->string_ptr[i] < value.string_ptr[i])
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
 #pragma endregion 
+
+
+const char* My_String::Get_String() const
+{
+	return string_ptr;
+}
+
+int My_String::Get_Size() const
+{
+	return size;
+}
 
 void My_String::Construct_Array(const char* value)
 {
