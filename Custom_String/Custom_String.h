@@ -14,6 +14,9 @@ public:
 
 	My_String(My_String&& x) noexcept;
 
+	// concatenate constructor 
+	My_String(const My_String& left, const My_String& right);
+
 	~My_String();
 	
 
@@ -30,7 +33,7 @@ public:
 	bool operator<(const My_String& value) const;
 
 
-	const char* Get_String() const;
+	const char* Get_C_Str() const;
 
 	int Get_Size() const;
 

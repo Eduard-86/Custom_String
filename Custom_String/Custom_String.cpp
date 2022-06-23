@@ -13,12 +13,32 @@ My_String::My_String(const My_String& value)
 }
 
 My_String::My_String(My_String&& x) noexcept
-{
+{	
 	std::swap(string_ptr, x.string_ptr);
 	std::swap(size, x.size);
 
 	x.string_ptr = nullptr;
-	
+}
+
+My_String::My_String(const My_String& left, const My_String& right)
+{
+	size = left.size + right.size;
+
+	string_ptr = new char[size + 1];
+
+	int i = 0;
+
+	for (; i < left.size; ++i)
+	{
+		string_ptr[i] = left.string_ptr[i];
+	}
+
+	for (int j = 0; j < right.size; ++i, ++j)
+	{
+		string_ptr[i] = right.string_ptr[j];
+	}
+
+	string_ptr[size] = '\0';
 }
 
 My_String::~My_String()
@@ -41,6 +61,12 @@ My_String& My_String::operator=(const char* value)
 
 My_String& My_String::operator=(const My_String& value)
 {
+	// todo
+	if (&value == this)
+	{
+		return *this;
+	}
+	
 	delete[] string_ptr;
 
 	Construct_Array(value);
@@ -60,6 +86,11 @@ My_String& My_String::operator=(My_String&& x) noexcept
 
 bool My_String::operator==(const My_String& value) const
 {
+	if (&value == this)
+	{
+		return true;
+	}
+	
 	if (this->size != value.size)
 	{
 		return false;
@@ -131,7 +162,7 @@ bool My_String::operator<(const My_String& value) const
 #pragma endregion 
 
 
-const char* My_String::Get_String() const
+const char* My_String::Get_C_Str() const
 {
 	return string_ptr;
 }
@@ -144,6 +175,12 @@ int My_String::Get_Size() const
 void My_String::Construct_Array(const char* value)
 {
 	size = strlen(value);
+
+	if (size == 0)
+	{
+		string_ptr = nullptr;
+		return;
+	}
 
 	string_ptr = new char[size + 1];
 
@@ -158,6 +195,12 @@ void My_String::Construct_Array(const char* value)
 void My_String::Construct_Array(const My_String& value)
 {
 	size = value.size;
+
+	if(size == 0)
+	{
+		string_ptr = nullptr;
+		return ;
+	}
 
 	string_ptr = new char[size + 1];
 

@@ -1,5 +1,5 @@
 ﻿  Custom_String.cpp
   Source.cpp
-D:\Projects\!Tests\Custom_String\Custom_String\Source.cpp(79,19): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Projects\Custom_String\Custom_String\Source.cpp(58,19): warning C4018: <: несоответствие типов со знаком и без знака
   Создание кода...
-  Custom_String.vcxproj -> D:\Projects\!Tests\Custom_String\Debug\Custom_String.exe
+  Custom_String.vcxproj -> C:\Projects\Custom_String\Debug\Custom_String.exe
