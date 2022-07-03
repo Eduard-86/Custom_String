@@ -46,7 +46,7 @@ private:
 
 	void Construct_Array(const char* value);
 
-	void Construct_Array(const My_String& value);
+	//void Construct_Array(const My_String& value);
 };
 
 
