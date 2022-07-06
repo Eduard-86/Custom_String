@@ -109,7 +109,7 @@ bool My_String::operator==(const My_String& value) const
 		return false;
 	}
 
-	return (!memcmp(this->Get_C_Str(), value.Get_C_Str(), size));
+	return (0 == memcmp(this->Get_C_Str(), value.Get_C_Str(), size));
 	
 	int tempsize = this->size;
 
