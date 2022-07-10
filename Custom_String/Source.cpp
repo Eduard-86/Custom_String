@@ -18,36 +18,28 @@ int main()
 	
 	const char* tttt1 = "ffffffff";
 	
-	memcpy(&ffff1[4], tttt1, 4);
+	memcpy(&ffff1[4], tttt1, 2);
 
-	//todo переделать копирование и конкатанацию с помащью memcpy
-	//todo переделать сравнение через memcmp
-	//
-	//todo конструктор конкатенации - тоже memcpy
-	//todo для копирования плоских данных лучше использовать memcpy а не цикл с перебором
+	memcpy(ffff1, tttt1,20);
 
 	
-	My_String g1("sss");
-	My_String g2("ssf");
+	//t odo переделать копирование и конкатанацию с помащью memcpy
+	//t odo переделать сравнение через memcmp
 
+
+	
+	My_String g1("shs");
+	My_String g2("fgf");
+
+	My_String g3 = g1 + g2;
+
+	My_String g4 = g3;
+
+	
 	bool A = g1 == g2;
 
-	bool B = g1 == g1;
-	
+	bool B = g4 == g3;
 
-	int gg = 5;
-	int ss = 0;
-
-	const char* ffff = "dddddddd";
-	const char* tttt = "ffffffff";
-	
-	ss = memcmp("oopp", "ggg", gg);
-
-	ss = memcmp("ggg", "ggg", gg);
-
-	ss = memcmp("ggg", "oopp", gg);
-
-	ss = memcmp(ffff, ffff, gg);
 
 
 	vector<My_String> array;

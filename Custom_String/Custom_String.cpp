@@ -9,25 +9,12 @@ My_String::My_String(const char* value)
 
 My_String::My_String(const My_String& value)
 {
-	//Construct_Array(value);
 	Construct_Array(value.Get_C_Str());
 }
 
 My_String::My_String(My_String&& x) noexcept
 {	
-	//std::move(string_ptr, x.string_ptr);
-	//std::swap(size, x.size);
-
-	//todo
-	//Construct_Movement(x);
-
-	string_ptr = x.string_ptr;
-
-	size = x.size;
-
-	x.size = 0;
-	
-	x.string_ptr = nullptr;
+	Construct_Movement(std::move(x));
 }
 
 My_String::My_String(const My_String& left, const My_String& right)
@@ -36,17 +23,9 @@ My_String::My_String(const My_String& left, const My_String& right)
 
 	string_ptr = new char[size + 1];
 
-	int i = 0;
+	memcpy(string_ptr, left.Get_C_Str(), left.size);
 
-	for (; i < left.size; ++i)
-	{
-		string_ptr[i] = left.string_ptr[i];
-	}
-
-	for (int j = 0; j < right.size; ++i, ++j)
-	{
-		string_ptr[i] = right.string_ptr[j];
-	}
+	memcpy(&string_ptr[left.size], right.Get_C_Str(), right.size);
 
 	string_ptr[size] = '\0';
 }
@@ -88,15 +67,10 @@ My_String& My_String::operator=(My_String&& x) noexcept
 {
 	//std::swap(string_ptr, x.string_ptr);
 	//std::swap(size, x.size);
+
+	//todo
+	Construct_Movement(std::move(x));
 	
-	string_ptr = x.string_ptr;
-
-	size = x.size;
-
-	x.size = 0;
-
-	x.string_ptr = nullptr;
-
 	return *this;
 }
 
@@ -196,10 +170,7 @@ void My_String::Construct_Array(const char* value)
 
 	string_ptr = new char[size + 1];
 
-	for (int i = 0; i <= size; ++i)
-	{
-		string_ptr[i] = value[i];
-	}
+	memcpy(string_ptr, value, size);
 
 	string_ptr[size] = '\0';
 }
