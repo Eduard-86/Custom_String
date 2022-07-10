@@ -18,6 +18,9 @@ My_String::My_String(My_String&& x) noexcept
 	//std::move(string_ptr, x.string_ptr);
 	//std::swap(size, x.size);
 
+	//todo
+	//Construct_Movement(x);
+
 	string_ptr = x.string_ptr;
 
 	size = x.size;
@@ -110,18 +113,6 @@ bool My_String::operator==(const My_String& value) const
 	}
 
 	return (0 == memcmp(this->Get_C_Str(), value.Get_C_Str(), size));
-	
-	int tempsize = this->size;
-
-	for (int i = 0; i < tempsize; ++i)
-	{
-		if (this->string_ptr[i] != value.string_ptr[i])
-		{
-			return false;
-		}
-	}
-
-	return true;
 }
 
 bool My_String::operator>(const My_String& value) const
@@ -211,6 +202,17 @@ void My_String::Construct_Array(const char* value)
 	}
 
 	string_ptr[size] = '\0';
+}
+
+void My_String::Construct_Movement(My_String&& x)
+{
+	string_ptr = x.string_ptr;
+
+	size = x.size;
+
+	x.size = 0;
+
+	x.string_ptr = nullptr;
 }
 
 /*
