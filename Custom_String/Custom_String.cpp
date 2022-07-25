@@ -50,7 +50,6 @@ My_String& My_String::operator=(const char* value)
 
 My_String& My_String::operator=(const My_String& value)
 {
-	// todo
 	if (&value == this)
 	{
 		return *this;
@@ -65,10 +64,6 @@ My_String& My_String::operator=(const My_String& value)
 
 My_String& My_String::operator=(My_String&& x) noexcept
 {
-	//std::swap(string_ptr, x.string_ptr);
-	//std::swap(size, x.size);
-
-	//todo
 	Construct_Movement(std::move(x));
 	
 	return *this;
